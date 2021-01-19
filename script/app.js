@@ -17,6 +17,7 @@ function init() {
         });
     let firstSample = subjectIds[0];
     updateChart(firstSample);
+    updateMetadata(firstSample);
     });
 }
 
@@ -43,7 +44,6 @@ function updateChart(sample) {
         };
         var data = [trace1];
         var layout = {
-            title: 'Bacteria Cultures per Sample',
             showlegend: false,
             hovermode: 'closest',
             xaxis: {title:"OTU (Operational Taxonomic Unit) ID " +sample},
@@ -69,7 +69,18 @@ function updateChart(sample) {
     });
 }
 
-
+function updateMetadata(sample) {
+    d3.json("/data/data_samples.json").then((data) => {
+        var metadata = data.metadata;
+        var filterArray = metadata.filter(sampleObject => sampleObject.id == sample);
+        var result = filterArray[0];
+        var metaPanel = d3.select("#sample-metadata");
+        metaPanel.html("");
+        Object.entries(result).forEach(([key, value]) => {
+            metaPanel.append("h6").text(`${key.toUpperCase()}: ${value}`)
+        })
+    });
+}
 
 function optionChanged(sample) {
     // Fetch new data each time a new sample is selected
