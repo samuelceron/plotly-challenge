@@ -68,5 +68,13 @@ function updateChart(sample) {
         Plotly.newPlot("bar", data, layout);  
     });
 }
+
+
+
+function optionChanged(sample) {
+    // Fetch new data each time a new sample is selected
+    updateChart(sample);
+    updateMetadata(sample);
+  }
 // Initialize the dashboard
 init();
