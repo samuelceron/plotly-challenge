@@ -70,7 +70,7 @@ function updateChart(sample) {
 }
 
 function updateMetadata(sample) {
-    d3.json("/data/data_samples.json").then((data) => {
+    d3.json("./data/data_samples.json").then((data) => {
         var metadata = data.metadata;
         var filterArray = metadata.filter(sampleObject => sampleObject.id == sample);
         var result = filterArray[0];
