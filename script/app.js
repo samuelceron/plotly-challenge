@@ -7,7 +7,7 @@ function init() {
     let selector = d3.select("#selDataset");
     
     // Fill dropdown menu with sample Names
-    d3.json("/data/data_samples.json").then((data) => {
+    d3.json("./data/data_samples.json").then((data) => {
         let subjectIds = data.names;
         subjectIds.forEach((id) => {
             selector
@@ -22,7 +22,7 @@ function init() {
 }
 
 function updateChart(sample) {    
-    d3.json("/data/data_samples.json").then((data) => {
+    d3.json("./data/data_samples.json").then((data) => {
         //Set data from the sample selected
         let samples = data.samples;
         let filterArray = samples.filter(sampleObject => sampleObject.id == sample);
